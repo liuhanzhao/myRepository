@@ -8,6 +8,7 @@ public class Airplane extends FlyingObject implements Enemies {
 
 	public Airplane() {
 		super(49, 36);
+		System.out.println("nihao");
 		resistance=200;
 		speed = 1;
 		x = (int) (Math.random() * (World.WORLD_WIDTH - width + 1));
