@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<meta charset="utf-8" />
+		<title>学子商城</title>
+		<!--导入核心文件-->
+		<script src="../bootstrap3/js/holder.js"></script>
+		<link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+		<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+		<script src="../bootstrap3/js/bootstrap.js"></script>
+		<!-- 字体图标 -->
+		<link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<script type="text/javascript">
+		$(function(){
+			console.log("已经发送请求了！");
+			url="../user/handle_getInfo.do";
+		  $.ajax({
+			 "url":url,
+			 "type":"GET",
+			 "dataType":"json",
+			 "success":function(json){
+				 $("#username").val(json.data.username);
+				 $("#phone").val(json.data.phone);
+				 $("#email").val(json.data.email);
+				 console.log("gender:"+json.data.gender);
+				 if(json.data.gender==0){
+					 $("#female").attr("checked","checked");
+				 }else{
+					 $("#male").attr("checked","checked");
+				 }
+				 
+				 
+			 },
+			 "error":function(){
+				 
+			 }
+			 
+			  
+			  
+			  
+		  });
+		});
+		
+		
+		</script>
+	</head>
+
+	<body>
+		<!--顶部-->
+		<iframe src="topTemplate.html" frameborder="0" width="100%" scrolling="no" height="170"></iframe>
+
+		<div class="col-md-2">
+
+			<iframe src="leftTemplate.html" width="100%" frameborder="0" scrolling="no" height="300"></iframe>
+
+		</div>
+		<div class="col-md-10	">
+			<div class="panel panel-default">
+				<ul class="nav nav-tabs">
+					<li><a href="password.html">修改密码</a></li>
+					<li class="active"><a href="#">个人资料</a></li>
+					<li><a href="upload.html">上传头像</a></li>
+					<li><a href="address.html">收货管理</a></li>
+
+				</ul>
+				<div class="panel-body">
+					<form id="updateInfo_form" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="username" class="col-md-2 control-label">用户名：</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="username" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="phone" class="col-md-2 control-label">电话号码：</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="phone" name="phone" placeholder="请输入电话号码" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-md-2 control-label">电子邮箱：</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="email" name="email" placeholder="请输入电子邮箱" >
+							</div>
+						</div>
+						
+						    <div class="form-group">
+							<label for="gender" class="col-md-2 control-label">性别：</label>
+							<div class="col-md-8">
+								<label class="radio-inline">
+									<input type="radio" name="gender" id="male" value="1" checked="checked">男
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="gender" id="female" value="0">女
+								</label>
+							</div>
+						</div> 
+						 
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="button" class="btn btn-primary" id="updateInfo_btn"  value="修改" ><br>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	
+
+		<!--底部-->
+		<iframe src="footerTemplate.html" frameborder="0" width="100%" scrolling="no" height="350"></iframe>
+		<script type="text/javascript">
+		$(function(){
+		$("#updateInfo_btn").click(function(){
+			var url="../user/handle_updateInfo.do";
+			var data=$("#updateInfo_form").serialize();
+			console.log(data);
+			$.ajax({
+				"url":url,
+				"data":data,
+				"type":"POST",
+				"dataType":"json",
+				"success":function(json){
+					if(json.state==200){
+						alert("修改成功！");
+					}else{
+						alert("修改失败！");
+					}
+				}
+			});										
+		});
+		});
+		</script>
+	</body>
+
+</html>
