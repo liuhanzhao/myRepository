@@ -8,9 +8,10 @@ public class Airplane extends FlyingObject implements Enemies {
 
 	public Airplane() {
 		super(49, 36);
-		System.out.println("nihao");
+		System.out.println("我又加入了一个输入语句");
 		resistance=200;
 		speed = 1;
+		System.out.println("git Test!");
 		x = (int) (Math.random() * (World.WORLD_WIDTH - width + 1));
 		y = -height;
 	}
